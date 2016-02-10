@@ -38,3 +38,16 @@
 
 # Composer PHAR
 /composer.phar
+
+/web/node_modules/
+
+/components/
+
+/.idea/
+
+# ignore all .vagrant directories
+.vagrant/
+
+# ignore all generated bootstraps
+/bootstraps/*
+!bootstraps/.gitkeep
