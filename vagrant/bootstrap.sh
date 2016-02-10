@@ -47,9 +47,6 @@ sudo apt-get install -y nodejs
 sudo apt-get install php5-mongo
 sudo service apache2 restart
 
-# configure MongoDB connection string
-sed -i 's/^    mongo_connection_string: mongodb:\/\/localhost:27017$/    mongo_connection_string: mongodb:\/\/192\.168\.1\.7:27017/' /vagrant/app/config/config.yml
-
 # composer install
 cd /vagrant
 sudo composer install
