@@ -142,7 +142,7 @@ class Module
 	 * @param array $array
 	 * @return Module
 	 */
-	public function fromArray($array)
+	public function fillByArray($array)
 	{
 		if (isset($array['id'])) {
 			$this->setId($array['id']);
@@ -162,6 +162,45 @@ class Module
 
 		if (isset($array['depends_on'])) {
 			$this->setDependsOn($array['depends_on']);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * @param array $array
+	 * @return Module
+	 */
+	public function fromArray($array)
+	{
+		if (isset($array['id'])) {
+			$this->setId($array['id']);
+		} else {
+			$this->id = null;
+		}
+
+		if (isset($array['name'])) {
+			$this->setName($array['name']);
+		} else {
+			$this->name = null;
+		}
+
+		if (isset($array['code'])) {
+			$this->setCode($array['code']);
+		} else {
+			$this->code = null;
+		}
+
+		if (isset($array['default'])) {
+			$this->setDefault($array['default']);
+		} else {
+			$this->default = null;
+		}
+
+		if (isset($array['depends_on'])) {
+			$this->setDependsOn($array['depends_on']);
+		} else {
+			$this->dependsOn = null;
 		}
 
 		return $this;

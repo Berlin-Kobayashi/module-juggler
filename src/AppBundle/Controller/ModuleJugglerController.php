@@ -63,6 +63,8 @@ class ModuleJugglerController extends Controller
 	public function updateModuleAction(Request $request, $id)
 	{
 		$dm = $this->get('doctrine_mongodb')->getManager();
+
+		/** @var Module $module */
 		$module = $dm->getRepository('AppBundle:Module')->find($id);
 
 		if (!$module) {
@@ -73,6 +75,31 @@ class ModuleJugglerController extends Controller
 
 		$input = json_decode((string)$request->getContent(), true);
 		$module->fromArray($input);
+
+		$dm->flush();
+
+		return new JsonResponse($module->toArray());
+	}
+
+	/**
+	 * @Route("/mj/api/modules/{id}")
+	 * @Method("PATCH")
+	 */
+	public function partialUpdateModuleAction(Request $request, $id)
+	{
+		$dm = $this->get('doctrine_mongodb')->getManager();
+
+		/** @var Module $module */
+		$module = $dm->getRepository('AppBundle:Module')->find($id);
+
+		if (!$module) {
+			$response = new Response();
+			$response->setStatusCode(Response::HTTP_NOT_FOUND);
+			return $response;
+		}
+
+		$input = json_decode((string)$request->getContent(), true);
+		$module->fillByArray($input);
 
 		$dm->flush();
 
