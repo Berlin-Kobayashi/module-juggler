@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0009",
+  "name": "Symfony installer",
+  "code": "sudo curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony\nsudo chmod a+x /usr/local/bin/symfony",
+  "depends_on": [
+	"56bb61d6279871bd218b0004"
+  ]
+}

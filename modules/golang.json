@@ -1,0 +1,5 @@
+{
+  "id": "56bb61d6279871bd218b0017",
+  "name": "golang",
+  "code": "curl -O https://storage.googleapis.com/golang/go1.5.3.linux-amd64.tar.gz\ntar -xvf go1.5.3.linux-amd64.tar.gz\nsudo mv go /usr/local\nrm go1.5.3.linux-amd64.tar.gz\necho 'export PATH=$PATH:/usr/local/go/bin' >> /home/vagrant/.bashrc\nmkdir goground\necho 'export GOPATH=$HOME/goground' >> /home/vagrant/.bashrc\nsource /home/vagrant/.bashrc"
+}

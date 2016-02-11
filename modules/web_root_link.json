@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0002",
+  "name": "web root link",
+  "code": "if ! [ -L /var/www ]; then\n  rm -rf /var/www/html\n  ln -fs /vagrant /var/www/html\nfi",
+  "depends_on": [
+	"56bb61d6279871bd218b0001"
+  ]
+}

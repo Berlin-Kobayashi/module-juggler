@@ -1,0 +1,5 @@
+{
+  "id": "56bb61d6279871bd218b0012",
+  "name": "MySQL",
+  "code": "sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password admin'\nsudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password admin'\nsudo apt-get -y install mysql-server"
+}

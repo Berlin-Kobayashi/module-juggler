@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Model\ModuleImporter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,25 +25,18 @@ class ModuleController extends Controller
 
 		$dm = $this->get('doctrine_mongodb')->getManager();
 
-		if (isset($input['id'])) {
-			/** @var Module $module */
-			$module = $dm->getRepository('AppBundle:Module')->find($input['id']);
+		$moduleImporter = new ModuleImporter($dm);
 
-			if ($module) {
-				$response = new Response();
-				$response->setStatusCode(Response::HTTP_BAD_REQUEST);
-				$response->setContent("Could not create module because given ID already is in use.");
-				return $response;
-			}
+		$result = $moduleImporter->importFromArray($input);
+
+		if ($result === false) {
+			$response = new Response();
+			$response->setStatusCode(Response::HTTP_BAD_REQUEST);
+			$response->setContent("Could not create module because given ID already is in use.");
+			return $response;
 		}
 
-		$module = new Module();
-		$module->fromArray($input);
-
-		$dm->persist($module);
-		$dm->flush();
-
-		return new JsonResponse($module->toArray());
+		return new JsonResponse($result);
 	}
 
 	/**

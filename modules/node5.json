@@ -1,0 +1,5 @@
+{
+  "id": "56bb61d6279871bd218b0010",
+  "name": "node.js 5",
+  "code": "curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -\nsudo apt-get install -y nodejs"
+}

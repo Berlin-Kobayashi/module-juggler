@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0008",
+  "name": "Composer",
+  "code": "curl -sS https://getcomposer.org/installer | sudo -H php -- --install-dir=/usr/local/bin --filename=composer",
+  "depends_on": [
+	"56bb61d6279871bd218b0005", "56bb61d6279871bd218b0004"
+  ]
+}

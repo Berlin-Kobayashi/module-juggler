@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0015",
+  "name": "open MongoDB port for everyone",
+  "code": "sudo iptables -A INPUT -p tcp --dport 27017 -j ACCEPT\nsudo sed -i 's/^  bindIp: 127\\.0\\.0\\.1$/#  bindIp: 127\\.0\\.0\\.1/' /etc/mongod.conf\nsudo service mongod restart",
+  "depends_on": [
+	"56bb61d6279871bd218b0014"
+  ]
+}

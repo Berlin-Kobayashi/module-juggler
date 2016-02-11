@@ -1,0 +1,9 @@
+{
+  "id": "56bb61d6279871bd218b0016",
+  "name": "MongoDB PHP extension",
+  "code": "sudo apt-get install php5-mongo\nsudo service apache2 restart",
+  "depends_on": [
+	"56bb61d6279871bd218b0004",
+	"56bb61d6279871bd218b0001"
+  ]
+}

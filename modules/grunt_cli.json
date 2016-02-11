@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0011",
+  "name": "grunt-cli",
+  "code": "sudo npm install -g grunt-cli",
+  "depends_on": [
+	"56bb61d6279871bd218b0010"
+  ]
+}

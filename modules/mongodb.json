@@ -1,0 +1,5 @@
+{
+  "id": "56bb61d6279871bd218b0014",
+  "name": "MongoDB",
+  "code": "sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927\necho \"deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.2 multiverse\" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list\necho \"deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse\" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list\nsudo apt-get update\nsudo apt-get install -y mongodb-org"
+}

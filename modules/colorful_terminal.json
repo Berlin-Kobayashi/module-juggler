@@ -1,5 +1,5 @@
 {
   "id": "56bb61d6279871bd218b0000",
-  "name": "Colorful Terminal",
-  "code": "sed -i 's/^.*force_color_prompt=yes.*/force_color_prompt=yes/' .bashrc\nsource .bashrc"
+  "name": "colorful terminal",
+  "code": "sed -i 's/^.*force_color_prompt=yes.*/force_color_prompt=yes/' /home/vagrant/.bashrc\nsource /home/vagrant/.bashrc"
 }

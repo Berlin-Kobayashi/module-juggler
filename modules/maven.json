@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0019",
+  "name": "Maven",
+  "code": "apt-cache search maven\nsudo apt-get install -y maven",
+  "depends_on": [
+	"56bb61d6279871bd218b0018"
+  ]
+}

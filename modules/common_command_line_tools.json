@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0006",
+  "name": "common command line tools",
+  "code": "git clone https://github.com/DanShu93/common-command-line-tools.git /home/vagrant/common-command-line-tools",
+  "depends_on": [
+	"56bb61d6279871bd218b0005"
+  ]
+}
