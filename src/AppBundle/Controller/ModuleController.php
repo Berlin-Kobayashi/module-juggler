@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Document\Module;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleJugglerController extends Controller
+class ModuleController extends Controller
 {
 
 	/**
@@ -22,10 +22,23 @@ class ModuleJugglerController extends Controller
 	{
 		$input = json_decode((string)$request->getContent(), true);
 
+		$dm = $this->get('doctrine_mongodb')->getManager();
+
+		if (isset($input['id'])) {
+			/** @var Module $module */
+			$module = $dm->getRepository('AppBundle:Module')->find($input['id']);
+
+			if ($module) {
+				$response = new Response();
+				$response->setStatusCode(Response::HTTP_BAD_REQUEST);
+				$response->setContent("Could not create module because given ID already is in use.");
+				return $response;
+			}
+		}
+
 		$module = new Module();
 		$module->fromArray($input);
 
-		$dm = $this->get('doctrine_mongodb')->getManager();
 		$dm->persist($module);
 		$dm->flush();
 
