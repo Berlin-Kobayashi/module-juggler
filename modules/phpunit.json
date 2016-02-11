@@ -1,0 +1,8 @@
+{
+  "id": "56bb61d6279871bd218b0020",
+  "name": "PHPUnit",
+  "code": "sudo wget https://phar.phpunit.de/phpunit.phar\nsudo chmod +x phpunit.phar\nsudo mv phpunit.phar /usr/local/bin/phpunit",
+  "depends_on": [
+	"56bb61d6279871bd218b0004"
+  ]
+}
