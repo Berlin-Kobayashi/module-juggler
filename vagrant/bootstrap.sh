@@ -47,6 +47,11 @@ sudo apt-get install -y nodejs
 sudo apt-get install php5-mongo
 sudo service apache2 restart
 
+# install PHPUnit
+sudo wget https://phar.phpunit.de/phpunit.phar
+sudo chmod +x phpunit.phar
+sudo mv phpunit.phar /usr/local/bin/phpunit
+
 # composer install
 cd /vagrant
 sudo composer install

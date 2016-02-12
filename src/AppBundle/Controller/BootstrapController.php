@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\Bootstrap;
+use AppBundle\Model\Bootstrapper;
+use AppBundle\Model\CircularModuleDependencyChecker;
 use AppBundle\Model\ModuleJuggler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -11,26 +14,38 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Document\Module;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleJuggleController extends Controller
+class BootstrapController extends Controller
 {
 
 	/**
-	 * @Route("/mj/api/modules/juggle")
-	 * @Method("GET")
+	 * @Route("/mj/api/bootstraps")
+	 * @Method("POST")
 	 */
-	public function juggleModulesAction(Request $request)
+	public function bootstrapAction(Request $request)
 	{
 		$dm = $this->get('doctrine_mongodb')->getManager();
 
-		$moduleIds = explode(',', $request->query->get('ids'));
+		$input = json_decode((string)$request->getContent(), true);
 
-		$moduleJuggler = new ModuleJuggler($dm);
+		$name = $input['name'];
+		$moduleIds = $input['modules'];
+
+		$bootstrapPath = $this->get('kernel')->getRootDir() . '/../bootstraps';
 
 		try {
 
+			$moduleJuggler = new ModuleJuggler($dm);
+
 			$juggledIds = $moduleJuggler->juggle($moduleIds);
 
-			return new JsonResponse($juggledIds);
+			$bootstrapper = new Bootstrapper($dm);
+			$content = $bootstrapper->bootstrap($juggledIds);
+
+			$bootstrap = new Bootstrap($name, $content, $bootstrapPath);
+
+			$bootstrap->save();
+
+			return new JsonResponse($bootstrap->toArray());
 
 		} catch (\Exception $e) {
 

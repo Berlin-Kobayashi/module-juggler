@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Model\CircularModuleDependencyChecker;
 use AppBundle\Model\ModuleJuggler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -11,32 +12,30 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use AppBundle\Document\Module;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModuleJuggleController extends Controller
+class ModuleCanDependOnController extends Controller
 {
 
 	/**
-	 * @Route("/mj/api/modules/juggle")
+	 * @Route("/mj/api/modules/{module}/can-depend-on/{dependency}")
 	 * @Method("GET")
 	 */
-	public function juggleModulesAction(Request $request)
+	public function canDependOnAction(Request $request, $module, $dependency)
 	{
 		$dm = $this->get('doctrine_mongodb')->getManager();
 
-		$moduleIds = explode(',', $request->query->get('ids'));
+		$circularModuleDependencyChecker = new CircularModuleDependencyChecker($dm);
 
-		$moduleJuggler = new ModuleJuggler($dm);
+		$canDependOn = !$circularModuleDependencyChecker->isCircularDependency($module, $dependency);
 
-		try {
+		if ($canDependOn) {
 
-			$juggledIds = $moduleJuggler->juggle($moduleIds);
+			return new Response();
 
-			return new JsonResponse($juggledIds);
-
-		} catch (\Exception $e) {
+		} else {
 
 			$response = new Response();
 			$response->setStatusCode(Response::HTTP_BAD_REQUEST);
-			$response->setContent($e->getMessage());
+			$response->setContent($module . ' can not depend on ' . $dependency . ' because it would lead to a circular dependency.');
 
 			return $response;
 
