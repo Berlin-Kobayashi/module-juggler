@@ -1,22 +1,26 @@
 #!/usr/bin/env bash
 
-# enable colorful terminal
-sed -i 's/^.*force_color_prompt=yes.*/force_color_prompt=yes/' .bashrc
-source .bashrc
+# This bootstrap was created by Module Juggler: https://github.com/DanShu93/module-juggler
+
+# install colorful terminal
+sed -i 's/^.*force_color_prompt=yes.*/force_color_prompt=yes/' /home/vagrant/.bashrc
+source /home/vagrant/.bashrc
 
 # install apache2
 sudo apt-get update
 sudo apt-get install -y apache2
+
+# install web root link
 if ! [ -L /var/www ]; then
   rm -rf /var/www/html
   ln -fs /vagrant/web /var/www/html
 fi
 
-# enable apache2 rewrite module
+# install apache2 rewrite module
 sudo a2enmod rewrite
 sudo service apache2 restart
 
-# install php 5.6
+# install PHP 5.6
 sudo add-apt-repository -y ppa:ondrej/php5-5.6
 sudo apt-get update
 sudo apt-get install -y python-software-properties
@@ -28,11 +32,11 @@ sudo apt-get install -y git
 # install common command line tools
 git clone https://github.com/DanShu93/common-command-line-tools.git /home/vagrant/common-command-line-tools
 
-# enable .htaccess
+# install .htaccess
 sudo php /home/vagrant/common-command-line-tools/apache2/htaccessEnabler.php
 sudo service apache2 restart
 
-# install composer
+# install Composer
 curl -sS https://getcomposer.org/installer | sudo -H php -- --install-dir=/usr/local/bin --filename=composer
 
 # install Symfony installer
@@ -59,3 +63,4 @@ sudo composer install
 # npm install
 cd /vagrant/web
 sudo npm install
+
