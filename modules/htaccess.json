@@ -3,6 +3,6 @@
   "name": ".htaccess",
   "code": "sudo php /home/vagrant/common-command-line-tools/apache2/htaccessEnabler.php\nsudo service apache2 restart",
   "depends_on": [
-	"56bb61d6279871bd218b0005", "56bb61d6279871bd218b0001"
+	"56bb61d6279871bd218b0006", "56bb61d6279871bd218b0001"
   ]
 }
